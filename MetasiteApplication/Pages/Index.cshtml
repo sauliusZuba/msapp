@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Search page";
+}
+<div id="firstPage">
+    @foreach (var item in Model.PagePartials)
+    {
+        <div class="box">
+            @await Html.PartialAsync("_SearchFormPartial", item)
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $('.btn-search-all').on('click', function (e) {
+                e.preventDefault();
+                var name = ($(this).data('name'));
+                var dateFrom = $('#date_from_' + name).val();
+                var dateUpTo = $('#date_upto_' + name).val();
+
+                var loads = $('.btn-search-all');
+                loads.each(function () {
+                    var pagePartial = ($(this).data('name'));
+                    $('#date_from_' + pagePartial).val(dateFrom);
+                    $('#date_upto_' + pagePartial).val(dateUpTo);
+                    $('#' + pagePartial + '-results').load("/index?handler=Search&pagePartial=" + pagePartial + "&dateFrom=" + dateFrom + "&dateUpTo=" + dateUpTo);
+                });
+            });
+        });
+    </script>
+}
+

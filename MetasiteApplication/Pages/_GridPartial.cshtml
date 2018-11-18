@@ -1,0 +1,99 @@
+﻿@using MetasiteApplication.Data
+@model GridViewModel
+@{
+    var show_results = Model.ShowCount ? "none" : "block";
+    var name = Model.Name;
+}
+
+<div>
+    @if (Model.ShowCount)
+    {
+        <div>
+            <div class="form-group">
+                <label>Total found: </label>
+                <label>@Model.Items.Count</label>
+            </div>
+            <button class="show-results btn-default" data-name="@name" id="show-result-@name">Show results</button>
+            <button class="hide-results btn-default" data-name="@name" id="hide-result-@name" style="display:none">Hide results</button>
+        </div>
+        <br />
+    }
+    <div class="ms-grid" id="res_@name" style="display:@show_results">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Items[0].Msisdn)
+                    </th>
+                    @if (Model.ColumnVisibilityMap.Contains("Date"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.Items[0].Date)
+                        </th>
+                    }
+                    @if (Model.ColumnVisibilityMap.Contains("Duration"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.Items[0].Duration)
+                        </th>
+                    }
+                    @if (Model.ColumnVisibilityMap.Contains("Count"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.Items[0].Count)
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Msisdn)
+                        </td>
+                        @if (Model.ColumnVisibilityMap.Contains("Date"))
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                        }
+                        @if (Model.ColumnVisibilityMap.Contains("Duration"))
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Duration)
+                            </td>
+                        }
+                        @if (Model.ColumnVisibilityMap.Contains("Count"))
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Count)
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.show-results').on('click', function (e) {
+            e.preventDefault();
+            var name = ($(this).data('name'));
+            $('#show-result-' + name).hide();
+            $('#hide-result-' + name).show();
+            $('#res_' + name).show();
+        });
+    });
+
+    $(function () {
+        $('.hide-results').on('click', function () {
+            var name = ($(this).data('name'));
+            $('#show-result-' + name).show();
+            $('#hide-result-' + name).hide();
+            $('#res_' + name).hide();
+        });
+    });
+</script>

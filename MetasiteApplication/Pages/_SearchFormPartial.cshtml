@@ -1,0 +1,23 @@
+﻿@model string
+
+<form method="GET" data-ajax="true" data-ajax-update="#@Model-results" data-ajax-url='@Url.Page(pageName: "", pageHandler: "Search")'>
+    <fieldset>
+        <legend>@Model</legend>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="ms-label">From:</label>
+                <input type="date" class="form-control ms-field" name="DateFrom" id="date_from_@Model" />
+            </div>
+            <div class="form-group">
+                <label class="ms-label">Up to:</label>
+                <input type="date" class="form-control ms-field" name="DateUpTo" id="date_upto_@Model" />
+            </div>
+            <input type="hidden" name="pagePartial" value="@Model" />
+            <input type="submit" value="Search @Model" class="btn-default" />
+            <button class="btn-search-all btn-default" data-name="@Model">Search all</button>
+        </div>
+        <div id="@Model-results"></div>
+    </fieldset>
+    <br />
+</form>
+

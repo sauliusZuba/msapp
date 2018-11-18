@@ -1,0 +1,35 @@
+﻿.ms-grid {
+    line-height: 1.25em;
+    position: relative;
+    overflow-x: auto;
+    font-size: 1rem;
+}
+
+    .ms-grid table {
+        border-collapse: collapse;
+        max-width: 100%;
+        width: 90%;
+        margin-left: 20px
+    }
+
+    .ms-grid th {
+        background-clip: padding-box;
+        background-color: #f7f7f7;
+        position: relative;
+    }
+
+    .ms-grid th,
+    .ms-grid td {
+        border: 1px solid #dee2e6;
+        padding: 0.75em;
+    }
+
+.ms-label {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+}
+
+.ms-field {
+    width: 80%;
+}
